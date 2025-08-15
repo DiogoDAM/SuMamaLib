@@ -2,11 +2,13 @@ using System;
 
 namespace SuMamaLib;
 
-public abstract class Level : IDisposable
+public class Level : IDisposable, IEquatable<Level>
 {
 	public bool Disposed { get; protected set; }
 	public bool IsActive { get; protected set; }
 	public bool IsDrawable { get; protected set; }
+
+	public int Id;
 
 	public Level()
 	{
@@ -14,18 +16,21 @@ public abstract class Level : IDisposable
 
 	public virtual void Start()
 	{
-		Active();
 	}
 
-	public virtual void PreUpdate()
+	public virtual void PreUpdate(Time time)
 	{
 	}
 
-	public virtual void Update()
+	public virtual void Update(Time time)
 	{
 	}
 
-	public virtual void AfterUpdate()
+	public virtual void AfterUpdate(Time time)
+	{
+	}
+
+	public virtual void Draw()
 	{
 	}
 
@@ -33,6 +38,8 @@ public abstract class Level : IDisposable
 	{
 		IsActive = true;
 		IsDrawable = true;
+
+		Start();
 	}
 
 	public virtual void Desactive()
@@ -58,4 +65,9 @@ public abstract class Level : IDisposable
 			}
 		}
 	}
+
+    public bool Equals(Level other)
+    {
+		return Id == other.Id;
+    }
 }

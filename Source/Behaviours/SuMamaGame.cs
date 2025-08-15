@@ -11,13 +11,18 @@ public class SuMamaGame : Game
 	private static SuMamaGame s_Instance;
 	public static SuMamaGame Instance => s_Instance;
 
-	//Game Util Properties
+	//Game Graphics Util Properties
 	public new static ContentManager Content;
 	public new static GraphicsDevice GraphicsDevice;
 	public static GraphicsDeviceManager Graphics;
 	public static SpriteBatch SpriteBatch;
 
+	//Game Utils Properties
 	public Time Time;
+	public LevelManager LevelManager;
+	public static AssetsManager Assets;
+	public static Input Input;
+	public static Level CurrentLevel => LevelManager.CurrentLevel;
 
 	//Window
 	public string Title => Window.Title;
@@ -38,12 +43,18 @@ public class SuMamaGame : Game
 		ResizeWindow(ww, wh);
 		SetWindowFullscreen(isFullscreen);
 
+		LevelManager = new();
+		Input = new();
+		Assets = new();
+
 		IsMouseVisible = true;
 	}
 
 	protected override void Initialize()
 	{
 		base.Initialize();
+
+		CurrentLevel?.Start();
 
 		GraphicsDevice = base.GraphicsDevice;
 		SpriteBatch = new(GraphicsDevice);
@@ -52,12 +63,21 @@ public class SuMamaGame : Game
 	protected override void Update(GameTime gameTime)
 	{
 		Time.GameTime = gameTime;
+		Input.Update();
+
+		CurrentLevel?.PreUpdate(Time);
+
+		CurrentLevel?.Update(Time);
+
+		CurrentLevel?.AfterUpdate(Time);
 
 		base.Update(gameTime);
 	}
 
 	protected override void Draw(GameTime gameTime)
 	{
+		CurrentLevel?.Draw();
+
 		base.Draw(gameTime);
 	}
 

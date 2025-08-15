@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class TextureRegion : ITextureRegion
 {
@@ -24,6 +24,6 @@ public class TextureRegion : ITextureRegion
 
 	public void Draw(Vector2 pos, Color color)
 	{
-		IaraGame.SpriteBatch.Draw(Texture, pos, SourceRectangle, color);
+		SuMamaGame.SpriteBatch.Draw(Texture, pos, SourceRectangle, color);
 	}
 }

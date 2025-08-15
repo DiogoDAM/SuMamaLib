@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using System;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class SpriteText
 {
@@ -15,31 +15,23 @@ public class SpriteText
 	public SpriteEffects Flip = SpriteEffects.None;
 
 	public string Text;
-	public Font Font;
+	public SpriteFont Font;
 
-	public Vector2 TextSize => Font.SpriteFont.MeasureString(Text);
+	public Vector2 TextSize => Font.MeasureString(Text);
 
 	public SpriteText()
 	{
 		Transform = new();
-		Font = new();
 	}
 
-	public SpriteText(SpriteFont spriteFont, int size, string text)
+	public SpriteText(SpriteFont spriteFont, string text)
 	{
 		Transform = new();
-		Font = new(spriteFont, size);
+		Font = spriteFont;
 		Text = text;
 	}
 
-	public SpriteText(Font font, string text)
-	{
-		Transform = new();
-		Font = font;
-		Text = text;
-	}
-
-	public SpriteText(Font font, string text, Transform parent)
+	public SpriteText(SpriteFont font, string text, Transform parent)
 	{
 		Transform = new();
 		Transform.Parent = parent;
@@ -55,7 +47,7 @@ public class SpriteText
 
 	public void Draw()
 	{
-		IaraGame.SpriteBatch.DrawString(Font.SpriteFont, Text, Transform.GlobalPosition, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
+		SuMamaGame.SpriteBatch.DrawString(Font, Text, Transform.GlobalPosition, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
 	}
 
 }

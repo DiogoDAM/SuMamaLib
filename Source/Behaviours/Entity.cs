@@ -8,8 +8,11 @@ public abstract class Entity : IDisposable
 	public bool IsActive { get; protected set; }
 	public bool IsDrawable { get; protected set; }
 
+	public Transform Transform; 
+
 	public Entity()
 	{
+		Transform = new();
 	}
 
 	public virtual void Start()

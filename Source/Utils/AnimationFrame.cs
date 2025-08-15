@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public struct AnimationFrame
 {

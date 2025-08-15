@@ -1,10 +1,7 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
 using System;
 using System.Collections.Generic;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class AssetsManager
 {
@@ -17,17 +14,17 @@ public class AssetsManager
 
 	public void CreateTexture(string textureName, ITextureRegion texture)
 	{
-		if(texture == null) throw new ArgumentNullException("IaraEngine :: AssetsManager.CreateTexture<T>() texture is null");
-		if(String.IsNullOrEmpty(textureName)) throw new ArgumentNullException("IaraEngine :: AssetsManager.CreateTexture<T>() textureName is null or empty");
+		if(texture == null) throw new ArgumentNullException();
+		if(String.IsNullOrEmpty(textureName)) throw new ArgumentNullException();
 
 		_textures.Add(textureName, texture);
 	}
 
 	public T LoadTexture<T>(string textureName) where T : ITextureRegion
 	{
-		if(String.IsNullOrEmpty(textureName)) throw new ArgumentNullException("IaraEngine :: AssetsManager.LoadTexture<T>() textureName is null or empty");
+		if(String.IsNullOrEmpty(textureName)) throw new ArgumentNullException();
 
-		if(!_textures.ContainsKey(textureName)) throw new KeyNotFoundException($"IaraEngine :: AssetsMananger.LoadTexture<T>() don't have textureName: {textureName}");
+		if(!_textures.ContainsKey(textureName)) throw new KeyNotFoundException();
 
 		return (T)_textures[textureName];
 	}

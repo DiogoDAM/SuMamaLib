@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Graphics;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public interface ITextureRegion
 {

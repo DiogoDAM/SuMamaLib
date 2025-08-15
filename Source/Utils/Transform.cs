@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class Transform
 {
@@ -21,6 +21,14 @@ public class Transform
 	public Transform(Vector2 pos) { Position = pos; }
 
 	public Transform(Vector2 pos, float rotation, Vector2 scale) { Position = pos; Rotation = rotation; Scale = scale; }
+
+	public Matrix CreateMatrix() => Matrix.CreateTranslation(-Position.X, -Position.Y, 0f) *
+		Matrix.CreateRotationZ(Rotation) *
+		Matrix.CreateScale(Scale.X, Scale.Y, 1f);
+
+	public Matrix CreateGlobalMatrix() => Matrix.CreateTranslation(-GlobalPosition.X, -GlobalPosition.Y, 0f) *
+		Matrix.CreateRotationZ(GlobalRotation) *
+		Matrix.CreateScale(GlobalScale.X, GlobalScale.Y, 1f);
 
 	public static Vector2 MoveTowards(Vector2 start, Vector2 target, float speed)
 	{

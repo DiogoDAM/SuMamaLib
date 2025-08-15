@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using System;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class Sprite : IDisposable
 {
@@ -53,7 +53,7 @@ public class Sprite : IDisposable
 
 	public virtual void Draw()
 	{
-		IaraGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, Region.SourceRectangle, Color, Transform.Rotation, Origin, Transform.Scale, Flip, LayerDepth);
+		SuMamaGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, Region.SourceRectangle, Color, Transform.Rotation, Origin, Transform.Scale, Flip, LayerDepth);
 	}
 
 	public void Dispose()

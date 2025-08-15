@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class TextureAtlas : ITextureRegion
 {
@@ -29,21 +29,21 @@ public class TextureAtlas : ITextureRegion
 
 	public TextureRegion GetRegion(string name)
 	{
-		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException($"IaraEngine :: TextureAtlas.GetRegion() atlas don't have the key: {name} for TextureRegion");
+		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException();
 
 		return _regions[name];
 	}
 
 	public Sprite CreateSprite(string name)
 	{
-		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException($"IaraEngine :: TextureAtlas.CreateSprite() atlas don't have the key: {name}");
+		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException();
 
 		return new Sprite(_regions[name]);
 	}
 
 	public AnimatedSprite CreateAnimatedSprite(string name, int sourcewidth, int sourceheight, bool isLoop=false, float defaultFramesDuration=0.1f)
 	{
-		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException($"IaraEngine :: TextureAtlas.CreateAnimatedSprite() atlas don't have the key: {name} to a TextureRegion");
+		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException();
 
 		return new AnimatedSprite(
 				_regions[name],
@@ -59,7 +59,7 @@ public class TextureAtlas : ITextureRegion
 
 	public AnimatedSprite CreateAnimatedSprite(string name, int sourcewidth, int sourceheight, bool isLoop=false, params float[] framesDuration)
 	{
-		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException($"IaraEngine :: TextureAtlas.CreateAnimatedSprite() atlas don't have the key: {name} to a TextureRegion");
+		if(!_regions.ContainsKey(name)) throw new KeyNotFoundException();
 
 		return new AnimatedSprite(
 				_regions[name],

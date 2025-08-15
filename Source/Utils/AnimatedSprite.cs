@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 using System;
 
-namespace IaraEngine;
+namespace SuMamaLib;
 
 public class AnimatedSprite : Sprite 
 {
@@ -69,11 +69,11 @@ public class AnimatedSprite : Sprite
 		IsLooping = isLooping;
 	}
 
-	public void Update()
+	public void Update(Time time)
 	{
 		if(IsRunning)
 		{
-			_frameTime -= IaraGame.DeltaTime;
+			_frameTime -= time.DeltaTime;
 
 			if(_frameTime <= 0)
 			{
@@ -97,7 +97,7 @@ public class AnimatedSprite : Sprite
 
 	public override void Draw()
 	{
-		IaraGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, CurrentFrame.Bounds, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
+		SuMamaGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, CurrentFrame.Bounds, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
 	}
 
 	public void Play()

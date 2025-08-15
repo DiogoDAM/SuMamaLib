@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObjectManager<T>  where T : IDisposable, IEnumerable
+public class ObjectManager<T>  where T : IDisposable
 {
 	public int MaxSize { get; set; }
 
