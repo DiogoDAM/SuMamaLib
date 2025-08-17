@@ -20,6 +20,7 @@ public class Level : IDisposable, IEquatable<Level>
 
 	public virtual void Start()
 	{
+		Active();
 	}
 
 	public virtual void PreUpdate(Time time)
@@ -42,8 +43,6 @@ public class Level : IDisposable, IEquatable<Level>
 	{
 		IsActive = true;
 		IsDrawable = true;
-
-		Start();
 	}
 
 	public virtual void Desactive()

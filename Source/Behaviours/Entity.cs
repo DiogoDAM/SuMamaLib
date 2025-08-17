@@ -10,6 +10,10 @@ public abstract class Entity : IDisposable
 
 	public Transform Transform; 
 
+	public Level Level;
+	public string Layer;
+	public int Id;
+
 	public Entity()
 	{
 		Transform = new();

@@ -21,6 +21,23 @@ public class LevelLayer : IDisposable
 		Level = level;
 	}
 
+	public void Add(Entity e)
+	{
+		Entities.Add(e);
+		e.Level = Level;
+	}
+
+	public void Remove(Entity e)
+	{
+		Entities.Remove(e);
+		e.Level = null;
+	}
+
+	public void Destroy(Entity e)
+	{
+		Entities.Free(e);
+	}
+
 	public void Start()
 	{
 		foreach(Entity e in Entities)
