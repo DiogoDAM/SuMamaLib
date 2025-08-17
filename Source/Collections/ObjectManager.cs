@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObjectManager<T>  where T : IDisposable
+public class ObjectManager<T> : IEnumerable, IEnumerable<T>, ICollection<T> where T : IDisposable
 {
 	public int MaxSize { get; set; }
 
@@ -12,9 +12,18 @@ public class ObjectManager<T>  where T : IDisposable
 
 	public int Count { get; private set; }
 
-	public ObjectManager()
+    public bool IsReadOnly => false;
+
+    public T this[int index] { 
+		get { if(index < 0 || index >= Count) throw new IndexOutOfRangeException(); return _objects[index];} 
+		set { if(index < 0 || index >= Count) throw new IndexOutOfRangeException(); _objects[index] = value;}
+	}
+
+    public ObjectManager()
 	{
 		_objects = new();
+		_toAdd = new();
+		_toRemove = new();
 
 		MaxSize = 64;
 	}
@@ -27,16 +36,22 @@ public class ObjectManager<T>  where T : IDisposable
 		Count++;
 	}
 
-	public void Remove(T item)
+	public bool Remove(T item)
 	{
+		if(!_objects.Contains(item)) return false;
+
 		_toRemove.Enqueue((item, false));
 		Count--;
+		return true;
 	}
 
-	public void Free(T item)
+	public bool Free(T item)
 	{
+		if(!_objects.Contains(item)) return false;
+
 		_toRemove.Enqueue((item, true));
 		Count--;
+		return true;
 	}
 
 	public bool Contains(T item)
@@ -52,6 +67,22 @@ public class ObjectManager<T>  where T : IDisposable
 	public List<T> FindAll(Predicate<T> predicate)
 	{
 		return _objects.FindAll(predicate);
+	}
+
+    public void CopyTo(T[] array, int arrayIndex)
+    {
+		for(int i=arrayIndex; i<array.Length; i++)
+		{
+			if(Count == MaxSize) break;
+
+			_toAdd.Enqueue(array[i]);
+			Count++;
+		}
+    }
+
+	public void Clear()
+	{
+		_objects.Clear();
 	}
 
 	public void ProcessAddAndRemove()
@@ -78,4 +109,10 @@ public class ObjectManager<T>  where T : IDisposable
     {
 		return GetEnumerator();
     }
+
+    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+    {
+		return _objects.GetEnumerator(); 
+    }
+
 }

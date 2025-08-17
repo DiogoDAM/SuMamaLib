@@ -43,6 +43,8 @@ public class SuMamaGame : Game
 		ResizeWindow(ww, wh);
 		SetWindowFullscreen(isFullscreen);
 
+		Time = new();
+
 		LevelManager = new();
 		Input = new();
 		Assets = new();
@@ -54,8 +56,6 @@ public class SuMamaGame : Game
 	{
 		base.Initialize();
 
-		CurrentLevel?.Start();
-
 		GraphicsDevice = base.GraphicsDevice;
 		SpriteBatch = new(GraphicsDevice);
 	}
@@ -65,18 +65,17 @@ public class SuMamaGame : Game
 		Time.GameTime = gameTime;
 		Input.Update();
 
-		CurrentLevel?.PreUpdate(Time);
-
-		CurrentLevel?.Update(Time);
-
-		CurrentLevel?.AfterUpdate(Time);
+		LevelManager.PreUpdate(Time);
+		LevelManager.Update(Time);
+		LevelManager.AfterUpdate(Time);
 
 		base.Update(gameTime);
 	}
 
 	protected override void Draw(GameTime gameTime)
 	{
-		CurrentLevel?.Draw();
+		GraphicsDevice.Clear(CurrentLevel.BackgroundColor);
+		LevelManager.Draw();
 
 		base.Draw(gameTime);
 	}

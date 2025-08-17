@@ -24,18 +24,21 @@ public class Sprite : IDisposable
 
 	public Sprite(TextureRegion texture)
 	{
+		Region = new();
 		Region = texture;
 		Transform = new();
 	}
 
 	public Sprite(TextureRegion texture, Vector2 pos)
 	{
+		Region = new();
 		Region = texture;
 		Transform = new(pos);
 	}
 
 	public Sprite(TextureRegion texture, Transform transform)
 	{
+		Region = new();
 		Region = texture;
 		Transform = new();
 		Transform.Parent = transform;

@@ -1,0 +1,12 @@
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.csproj.AssemblyReference.cache
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.GeneratedMSBuildEditorConfig.editorconfig
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.AssemblyInfoInputs.cache
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.AssemblyInfo.cs
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.csproj.CoreCompileInputs.cache
+/home/diogodam/Jogos/SuMamaLib/bin/Debug/net8.0/SuMamaLib.deps.json
+/home/diogodam/Jogos/SuMamaLib/bin/Debug/net8.0/SuMamaLib.dll
+/home/diogodam/Jogos/SuMamaLib/bin/Debug/net8.0/SuMamaLib.pdb
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.dll
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/refint/SuMamaLib.dll
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.pdb
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/ref/SuMamaLib.dll

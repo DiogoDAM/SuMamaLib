@@ -1,5 +1,7 @@
 using System;
 
+using Microsoft.Xna.Framework;
+
 namespace SuMamaLib;
 
 public class Level : IDisposable, IEquatable<Level>
@@ -7,6 +9,8 @@ public class Level : IDisposable, IEquatable<Level>
 	public bool Disposed { get; protected set; }
 	public bool IsActive { get; protected set; }
 	public bool IsDrawable { get; protected set; }
+
+	public Color BackgroundColor = Color.DimGray;
 
 	public int Id;
 
