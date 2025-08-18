@@ -1,6 +1,7 @@
 using System;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace SuMamaLib;
 
@@ -12,31 +13,53 @@ public class Level : IDisposable, IEquatable<Level>
 
 	public Color BackgroundColor = Color.DimGray;
 
+	public ContentManager Content;
+	public AssetsManager Assets;
+
+	public LevelLayer Instances;
+
 	public int Id;
 
 	public Level()
 	{
+		Content = new(SuMamaGame.Content.ServiceProvider);
+		Assets = new();
+		Instances = new(this);
 	}
 
+	//Behaviour Methods
 	public virtual void Start()
 	{
 		Active();
+
+		Instances.Start();
 	}
 
 	public virtual void PreUpdate(Time time)
 	{
+		Instances.PreUpdate(time);
 	}
 
 	public virtual void Update(Time time)
 	{
+		Instances.Update(time);
 	}
 
 	public virtual void AfterUpdate(Time time)
 	{
+		Instances.AfterUpdate(time);
 	}
 
 	public virtual void Draw()
 	{
+		Instances.Draw();
+	}
+
+	public virtual void UnloadContent()
+	{
+		Content.Unload();
+		Assets.Unload();
+		Instances.Clear();
 	}
 
 	public virtual void Active()
@@ -64,6 +87,8 @@ public class Level : IDisposable, IEquatable<Level>
 			if(!Disposed)
 			{
 				Desactive();
+				Instances.Dispose();
+				UnloadContent();
 				Disposed = true;
 			}
 		}

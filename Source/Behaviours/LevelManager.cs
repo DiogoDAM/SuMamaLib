@@ -5,10 +5,10 @@ namespace SuMamaLib;
 
 public class LevelManager
 {
-	private Dictionary<int, Level> _levels;
+	private Dictionary<Type, Level> _levels;
 
 	public static Level CurrentLevel { get; private set; }
-	private (int, bool) _nextLevelInfo;
+	private (Type, bool) _nextLevelInfo;
 
 	public LevelManager()
 	{
@@ -17,12 +17,14 @@ public class LevelManager
 
 	public void Start()
 	{
+		if(_nextLevelInfo.Item1 != null) _ChangeLevel();
+
 		CurrentLevel?.Start();
 	}
 
 	public void PreUpdate(Time time)
 	{
-		if(_nextLevelInfo.Item1 != -1) _ChangeLevel();
+		if(_nextLevelInfo.Item1 != null) _ChangeLevel();
 
 		CurrentLevel?.PreUpdate(time);
 	}
@@ -42,39 +44,39 @@ public class LevelManager
 		CurrentLevel?.Draw();
 	}
 
-	public void Add(int id, Level level)
+	public void Add<T>() where T : Level, new()
 	{
-		if(id == -1) throw new Exception("A level id don't could be -1");
-
-		level.Id = id;
-		_levels.Add(id, level);
+		T level = new T();
+		_levels.Add(level.GetType(), level);
 	}
 
-	public void Remove(int id)
+	public void Remove<T>() where T : Level
 	{
-		_levels.Remove(id);
+		_levels.Remove(typeof(T));
 	}
 
-	public void SwitchLevel(int id, bool disposable=false)
+	public void SwitchLevel<T>(bool disposable=false) where T : Level, new()
 	{
-		if(!_levels.ContainsKey(id)) throw new KeyNotFoundException();
+		Type type = typeof(T);
+		if(!_levels.ContainsKey(type)) throw new KeyNotFoundException();
 
-		if(_levels[id] == null) _levels[id] = new();
+		if(_levels[type].Disposed)  _levels[type] = new T();
 
-		_nextLevelInfo = (id, disposable); 
+		_nextLevelInfo = (type, disposable); 
 	}
 
 	private void _ChangeLevel()
 	{
+		var oldLevel = CurrentLevel;
 		CurrentLevel?.Desactive();
 
 		CurrentLevel = _levels[_nextLevelInfo.Item1];
 
-		CurrentLevel.Active();
+		CurrentLevel.Start();
 
-		if(_nextLevelInfo.Item2) CurrentLevel?.Dispose();
+		if(_nextLevelInfo.Item2 && !oldLevel.Disposed) { oldLevel.Dispose(); }
 
-		_nextLevelInfo.Item1 = -1;
+		_nextLevelInfo.Item1 = null;
 		_nextLevelInfo.Item2 = false;
 	}
 }

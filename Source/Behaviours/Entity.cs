@@ -2,7 +2,7 @@ using System;
 
 namespace SuMamaLib;
 
-public abstract class Entity : IDisposable
+public abstract class Entity : IDisposable, IPrototype
 {
 	public bool Disposed { get; protected set; }
 	public bool IsActive { get; protected set; }
@@ -13,6 +13,8 @@ public abstract class Entity : IDisposable
 	public Level Level;
 	public string Layer;
 	public int Id;
+
+	public Collider Collider;
 
 	public Entity()
 	{
@@ -53,20 +55,43 @@ public abstract class Entity : IDisposable
 	}
 
 
+    public IPrototype ShallowClone()
+    {
+		return (Entity)MemberwiseClone();
+    }
+
+    public IPrototype DeepClone()
+    {
+		Entity clone = (Entity)MemberwiseClone();
+
+		clone.Transform = new(Transform);
+		clone.Collider = (Collider)Collider.DeepClone();
+
+		return (Entity)clone;
+    }
+
+
 	public void Dispose()
 	{
 		Dispose(true);
 	}
 
-	protected void Dispose(bool disposable)
+	protected virtual void Dispose(bool disposable)
 	{
 		if(disposable)
 		{
 			if(!Disposed)
 			{
+				Transform = null;
+				Collider?.Dispose();
+
+				Level = null;
+				Layer = null;
+
 				Desactive();
 				Disposed = true;
 			}
 		}
 	}
+
 }

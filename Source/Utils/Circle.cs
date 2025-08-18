@@ -23,7 +23,7 @@ public readonly struct Circle : IEquatable<Circle>
 	public readonly bool IsEmpty => X == 0 && Y == 0 && Radius == 0;
 
 	public readonly Point Location => new Point(X, Y);
-	public readonly Vector2 Center => new Vector2(X, Y);
+	public readonly Vector2 Center => new Vector2(X + Radius, Y + Radius);
 
 	public Rectangle ToRectangle() => new Rectangle(Left, Top, Right - Left, Bottom - Top);
 
@@ -48,22 +48,22 @@ public readonly struct Circle : IEquatable<Circle>
 		Radius = radius;
 	}
 
-	public bool Intersects(Vector2 vec)
+	public bool Contains(Vector2 vec)
 	{
-		float distance = Vector2.Distance(Location.ToVector2(), vec);
-		return distance < Radius;
+		float distance = Vector2.DistanceSquared(Center, vec);
+		return distance < Radius * Radius;
 	}
 
-	public bool Intersects(Point location)
+	public bool Contains(Point location)
 	{
-		float distance = Vector2.Distance(Location.ToVector2(), location.ToVector2());
-		return distance < Radius;
+		float distance = Vector2.DistanceSquared(Center, location.ToVector2());
+		return distance < Radius * Radius;
 	}
 
 	public bool Intersects(Circle other)
 	{
 		int radius = (Radius + other.Radius) * (Radius + other.Radius);
-		float distance = Vector2.DistanceSquared(Location.ToVector2(), other.Location.ToVector2());
+		float distance = Vector2.DistanceSquared(Center, other.Center);
 		return distance < radius;
 	}
 

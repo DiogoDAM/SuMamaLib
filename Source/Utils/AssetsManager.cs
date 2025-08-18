@@ -28,4 +28,9 @@ public class AssetsManager
 
 		return (T)_textures[textureName];
 	}
+
+	public void Unload()
+	{
+		_textures.Clear();
+	}
 }

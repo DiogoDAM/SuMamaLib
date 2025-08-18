@@ -4,9 +4,9 @@ namespace SuMamaLib;
 
 public class Transform
 {
-	public Vector2 Position;
-	public float Rotation;
-	public Vector2 Scale = Vector2.One;
+	public Vector2 Position = Vector2.Zero;
+	public float Rotation = 0f;
+	public Vector2 Scale = Vector2.Zero;
 
 	public Transform Parent;
 

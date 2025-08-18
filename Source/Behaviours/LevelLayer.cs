@@ -25,21 +25,35 @@ public class LevelLayer : IDisposable
 	{
 		Entities.Add(e);
 		e.Level = Level;
+		e.Layer = Name;
 	}
 
-	public void Remove(Entity e)
+	public bool Remove(Entity e)
 	{
-		Entities.Remove(e);
-		e.Level = null;
+		bool value = Entities.Remove(e);
+
+		return value;
 	}
 
-	public void Destroy(Entity e)
+	public bool Destroy(Entity e)
 	{
-		Entities.Free(e);
+		bool value = Entities.Free(e);
+
+		return value;
 	}
 
+	public void Clear()
+	{
+		Entities.Clear();
+	}
+
+	public T GetType<T>() where T : Entity => (T)Entities.Find(e => e is T);
+
+	//Behaviour Methods
 	public void Start()
 	{
+		Entities.ProcessAddAndRemove();
+
 		foreach(Entity e in Entities)
 		{
 			e.Start();

@@ -87,19 +87,19 @@ public class ObjectManager<T> : IEnumerable, IEnumerable<T>, ICollection<T> wher
 
 	public void ProcessAddAndRemove()
 	{
-		foreach(var item in _toAdd)
+		for(int i=0; i<_toAdd.Count; i++)
 		{
+			var item = _toAdd.Dequeue();
 			_objects.Add(item);
-			_toAdd.Dequeue();
 		}
 
-		foreach(var pair in _toRemove)
+		for(int i=0; i<_toRemove.Count; i++)
 		{
+			var pair = _toRemove.Dequeue();
 			T item = pair.Item1;
 			bool disposable = pair.Item2;
 
 			_objects.Remove(item);
-			_toRemove.Dequeue();
 
 			if(disposable) item.Dispose();
 		}
@@ -107,7 +107,7 @@ public class ObjectManager<T> : IEnumerable, IEnumerable<T>, ICollection<T> wher
 
     public IEnumerator GetEnumerator()
     {
-		return GetEnumerator();
+		return _objects.GetEnumerator(); 
     }
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()

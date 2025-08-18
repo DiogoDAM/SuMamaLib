@@ -27,6 +27,7 @@ public class Sprite : IDisposable
 		Region = new();
 		Region = texture;
 		Transform = new();
+		Transform.Scale = Vector2.One;
 	}
 
 	public Sprite(TextureRegion texture, Vector2 pos)
@@ -34,6 +35,7 @@ public class Sprite : IDisposable
 		Region = new();
 		Region = texture;
 		Transform = new(pos);
+		Transform.Scale = Vector2.One;
 	}
 
 	public Sprite(TextureRegion texture, Transform transform)
@@ -42,6 +44,7 @@ public class Sprite : IDisposable
 		Region = texture;
 		Transform = new();
 		Transform.Parent = transform;
+		Transform.Scale = Vector2.One;
 	}
 
 	public void LookAt(Vector2 target)
@@ -56,7 +59,7 @@ public class Sprite : IDisposable
 
 	public virtual void Draw()
 	{
-		SuMamaGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, Region.SourceRectangle, Color, Transform.Rotation, Origin, Transform.Scale, Flip, LayerDepth);
+		SuMamaGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, Region.SourceRectangle, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
 	}
 
 	public void Dispose()
