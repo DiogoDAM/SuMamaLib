@@ -57,6 +57,9 @@ public class Sprite : IDisposable
 		Origin = new Vector2(Width, Height) * .5f;
 	}
 
+	public void FlipH(bool flip) => Flip = (flip) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+	public void FlipV(bool flip) => Flip = (flip) ? SpriteEffects.FlipVertically : SpriteEffects.None;
+
 	public virtual void Draw()
 	{
 		SuMamaGame.SpriteBatch.Draw(Region.Texture, Transform.GlobalPosition, Region.SourceRectangle, Color, Transform.GlobalRotation, Origin, Transform.GlobalScale, Flip, LayerDepth);
