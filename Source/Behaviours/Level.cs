@@ -16,6 +16,8 @@ public class Level : IDisposable, IEquatable<Level>
 	public ContentManager Content;
 	public AssetsManager Assets;
 
+	public Camera Camera;
+
 	public LevelLayer Instances;
 
 	public int Id;
@@ -25,6 +27,9 @@ public class Level : IDisposable, IEquatable<Level>
 		Content = new(SuMamaGame.Content.ServiceProvider);
 		Assets = new();
 		Instances = new(this);
+
+		Camera = new();
+		Camera.Transform.Scale = Vector2.One;
 	}
 
 	//Behaviour Methods

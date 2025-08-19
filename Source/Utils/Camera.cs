@@ -22,4 +22,6 @@ public class Camera
 		Viewport.Width = width;
 		Viewport.Height = height;
 	}
+
+	public Matrix GetMatrix() => Transform.CreateGlobalMatrix();
 }

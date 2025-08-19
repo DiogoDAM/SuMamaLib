@@ -11,6 +11,8 @@ public class MouseManager
 
 	public Vector2 CursorPosition => _curr.Position.ToVector2();
 
+	public Vector2 GlobalCursorPosition => Vector2.Transform(_curr.Position.ToVector2(), Matrix.Invert(SuMamaGame.CurrentLevel.Camera.GetMatrix()));
+
 	public MouseManager()
 	{
 		_prev = Mouse.GetState();

@@ -10,3 +10,4 @@
 /home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/refint/SuMamaLib.dll
 /home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.pdb
 /home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/ref/SuMamaLib.dll
+/home/diogodam/Jogos/SuMamaLib/obj/Debug/net8.0/SuMamaLib.sourcelink.json

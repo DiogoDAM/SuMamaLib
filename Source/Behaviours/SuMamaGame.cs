@@ -58,6 +58,8 @@ public class SuMamaGame : Game
 
 		GraphicsDevice = base.GraphicsDevice;
 		SpriteBatch = new(GraphicsDevice);
+
+		Drawer.Initialize(GraphicsDevice);
 	}
 
 	protected override void Update(GameTime gameTime)
