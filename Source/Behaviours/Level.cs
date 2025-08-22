@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -14,21 +14,19 @@ public class Level : IDisposable, IEquatable<Level>
 	public Color BackgroundColor = Color.DimGray;
 
 	public ContentManager Content;
-	public AssetsManager Assets;
 
 	public Camera Camera;
 
-	public LevelLayer Instances;
+	public SortedDictionary<string, LevelLayer> Layers;
 
 	public int Id;
 
 	public Level()
 	{
 		Content = new(SuMamaGame.Content.ServiceProvider);
-		Assets = new();
-		Instances = new(this);
+		Layers = new();
 
-		Camera = new();
+		Camera = new(SuMamaGame.WindowWidth, SuMamaGame.WindowHeight);
 		Camera.Transform.Scale = Vector2.One;
 	}
 
@@ -37,34 +35,48 @@ public class Level : IDisposable, IEquatable<Level>
 	{
 		Active();
 
-		Instances.Start();
+		foreach(var pairs in Layers)
+		{
+			pairs.Value.Start();
+		}
 	}
 
 	public virtual void PreUpdate(Time time)
 	{
-		Instances.PreUpdate(time);
+		foreach(var pairs in Layers)
+		{
+			pairs.Value.PreUpdate(time);
+		}
 	}
 
 	public virtual void Update(Time time)
 	{
-		Instances.Update(time);
+		foreach(var pairs in Layers)
+		{
+			pairs.Value.Update(time);
+		}
 	}
 
 	public virtual void AfterUpdate(Time time)
 	{
-		Instances.AfterUpdate(time);
+		foreach(var pairs in Layers)
+		{
+			pairs.Value.AfterUpdate(time);
+		}
 	}
 
 	public virtual void Draw()
 	{
-		Instances.Draw();
+		foreach(var pairs in Layers)
+		{
+			pairs.Value.Draw();
+		}
 	}
 
 	public virtual void UnloadContent()
 	{
 		Content.Unload();
-		Assets.Unload();
-		Instances.Clear();
+		Layers.Clear();
 	}
 
 	public virtual void Active()
@@ -92,7 +104,11 @@ public class Level : IDisposable, IEquatable<Level>
 			if(!Disposed)
 			{
 				Desactive();
-				Instances.Dispose();
+				foreach(var pairs in Layers)
+				{
+					pairs.Value.Dispose();
+				}
+				Layers.Clear();
 				UnloadContent();
 				Disposed = true;
 			}

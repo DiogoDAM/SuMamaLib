@@ -2,8 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-using System;
-
 namespace SuMamaLib;
 
 public class SuMamaGame : Game
@@ -20,14 +18,13 @@ public class SuMamaGame : Game
 	//Game Utils Properties
 	public Time Time;
 	public LevelManager LevelManager;
-	public static AssetsManager Assets;
 	public static Input Input;
 	public static Level CurrentLevel => LevelManager.CurrentLevel;
 
 	//Window
 	public string Title => Window.Title;
-	public int WindowWidth => Graphics.PreferredBackBufferWidth;
-	public int WindowHeight => Graphics.PreferredBackBufferHeight;
+	public static int WindowWidth => Graphics.PreferredBackBufferWidth;
+	public static int WindowHeight => Graphics.PreferredBackBufferHeight;
 	public bool IsFullscreen => Graphics.IsFullScreen;
 
 	public SuMamaGame(string title, int ww, int wh, bool isFullscreen=false)
@@ -47,7 +44,6 @@ public class SuMamaGame : Game
 
 		LevelManager = new();
 		Input = new();
-		Assets = new();
 
 		IsMouseVisible = true;
 	}

@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace SuMamaLib;
 
-public class TextureAtlas : ITextureRegion
+public class TextureAtlas
 {
 	private Dictionary<string, TextureRegion> _regions;
 

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SuMamaLib;
 
-public class TextureRegion : ITextureRegion
+public class TextureRegion
 {
 	public Texture2D Texture { get; set; }
 	public Rectangle SourceRectangle { get; set; }
