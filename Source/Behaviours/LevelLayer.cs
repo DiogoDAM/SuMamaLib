@@ -14,6 +14,7 @@ public class LevelLayer : IDisposable
 	public Level Level { get; private set; }
 
 	public SamplerState SamplerState = SamplerState.PointWrap;
+	public Camera Camera;
 
 	public LevelLayer(Level level)
 	{
@@ -88,7 +89,7 @@ public class LevelLayer : IDisposable
 
 	public void Draw()
 	{
-		SuMamaGame.SpriteBatch.Begin(samplerState: SamplerState);
+		SuMamaGame.SpriteBatch.Begin(samplerState: SamplerState, transformMatrix: Camera.GetMatrix());
 
 			foreach(Entity e in Entities)
 			{

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SuMamaLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cee84ce42017ff83ff896b20a3fae83b60594e69")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+752509792bbc47cb60beda02c61a9a1058997107")]
 [assembly: System.Reflection.AssemblyProductAttribute("SuMamaLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SuMamaLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
