@@ -11,7 +11,7 @@ public class Level : IDisposable, IEquatable<Level>
 	public bool IsActive { get; protected set; }
 	public bool IsDrawable { get; protected set; }
 
-	public Color BackgroundColor = Color.DimGray;
+	public Color BackgroundColor = Color.CornflowerBlue;
 
 	public ContentManager Content;
 

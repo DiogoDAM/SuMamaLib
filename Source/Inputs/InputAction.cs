@@ -24,6 +24,6 @@ public class InputAction
 
 	public static InputAction CreateMouseAction(byte button)
 	{
-		return new InputAction() { Type = EInputActionType.Keyboard, Button = button };
+		return new InputAction() { Type = EInputActionType.Mouse, Button = button };
 	}
 }
